@@ -1,7 +1,22 @@
 @charset "utf-8";
 
 body {
-  background: #d4d4d4 url("../images/background.png");
-  text-align: center;
-  font-family: sans-serif;
+  background: #fff;
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+}
+
+/* map */
+.outline {
+  fill: #ddd;
+}
+
+.neighborhood {
+  fill: #e5e5e5;
+  stroke: #fff;
+  stroke-width: 2;
+  shape-rendering: geometricprecision;
+
+  &:hover {
+    fill: #d5d5d5;
+  }
 }
