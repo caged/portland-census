@@ -6,5 +6,8 @@
 # a resulting value
 #
 window.__mappings =
-  'White Population': [['P008003', 'P008011'], ['P0050003', 'P0050011']]
-  'Black Population': [['P008004', 'P008012'], ['P0050004', 'P0050012']]
+  'Total Population': [['P001001'], ['P0010001']]
+  'White Population': [['P01000310'], ['P007000310']]
+  'Black Population': [['P01000411'], ['P007000411']]
+  'Hispanic Population': [['P008011', 'P008012', 'P008013', 'P008014', 'P008015', 'P008016', 'P008017'], ['P0050011', 'P0050012', 'P0050013', 'P0050014', 'P0050015', 'P0050016', 'P0050017']]
+  'Asian Population': [['P01000613'], ['P007000613']]
