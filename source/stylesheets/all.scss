@@ -19,4 +19,8 @@ body {
   &:hover {
     fill: #d5d5d5;
   }
+
+  &.shared {
+    fill: #fff;
+  }
 }
