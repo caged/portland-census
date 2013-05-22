@@ -17,6 +17,18 @@
   </head>
 
   <body class="<%= page_classes %>">
+    <header>
+      <h1>Portland Census Project</h1>
+      <div class="controls">
+        <select class="js-menu js-menu-subject"></select>
+        <select class="js-menu js-menu-type">
+          <option value="2010">2010 Totals</option>
+          <option value="2000">2000 Totals</option>
+          <option value="change">Total change from 2000 to 2010</option>
+          <option value="growth">% change from 2000 to 2010</option>
+        </select>
+      </div>
+    </header>
     <%= yield %>
   </body>
 </html>

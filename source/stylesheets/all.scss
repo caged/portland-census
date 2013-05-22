@@ -1,8 +1,29 @@
+//#= require reset
+
 @charset "utf-8";
 
 body {
-  background: #fff;
+  background: #f7f7f7 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAIUlEQVQYV2N89+7dfwYiACNIoZCQECMhtaMK8YYQ0cEDAIUFJ9QI76xWAAAAAElFTkSuQmCC);
   font-family: "Helvetica Neue", Helvetica, sans-serif;
+  margin: 0;
+}
+
+header {
+  background: #fff;
+  padding: 20px;
+  display: block;
+  font-weight: bold;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #e5e5e5;
+
+  .controls {
+    float: right;
+    margin-top: -20px;
+  }
+}
+
+.map {
+  float: right;
 }
 
 /* map */
@@ -12,6 +33,7 @@ body {
 
 .neighborhood {
   fill: #e5e5e5;
+  fill-opacity: 0.8;
   stroke: #fff;
   stroke-width: 0.5;
   shape-rendering: geometricprecision;
