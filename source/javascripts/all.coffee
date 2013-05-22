@@ -1,7 +1,7 @@
 #= require mappings
 
-width = 1200
-height = 1000
+width = 800
+height = 800
 vis    = null
 
 projection = d3.geo.albers().rotate([120])
@@ -35,31 +35,21 @@ d3.json 'data/neighborhoods.json', (pdx) ->
         current = nhoods[name] = {}
         current[2010] = data[2010].filter((d) -> d.NEIGHBORHOOD == name)[0]
         current[2000] = data[2000].filter((d) -> d.NEIGHBORHOOD == name)[0]
-        current.mappings = {}
 
         for key, ids of window.__mappings
-          vals2000 = []
-          vals2010 = []
           try
-            vals2000 = d3.sum ids[0].map (id) -> current[2000][id]
+            from = d3.sum(ids[0].map (id) -> current[2000][id])
+            to   = d3.sum(ids[1].map (id) -> current[2010][id])
+            change = to - from
+            growth = parseFloat ((change / from) * 100).toFixed(2)
+            current[key] = [from, to, change, growth]
           catch e
-            console.log "ERROR!!!! #{e}"
-            console.log name, key, vals2000
+            console.log "ERROR!!!! #{e} #{name} #{key}"
+        delete current[2000]
+        delete current[2010]
 
-          # for yeargroup in ids
-          #   console.log "#{key} #{i}"
-
-          # current.mappings[key] = [
-          #   d3.sum current[2000]
-          # ]
-
-          # <pattern id="diagonalHatch" patternUnits="userSpaceOnUse" width="4" height="4">
-          #   <path d="M-1,1 l2,-2
-          #            M0,4 l4,-4
-          #            M3,5 l2,-2" />
-          # </pattern>
-
-  vis.append('defs').append('pattern')
+    console.log nhoods
+  vis.append('pattern')
     .attr('id', 'hatch')
     .attr('patternUnits', 'userSpaceOnUse')
     .attr('width', 4)
@@ -68,9 +58,7 @@ d3.json 'data/neighborhoods.json', (pdx) ->
     .style('stroke', '#e1e1e1')
     .style('stroke-width', 0.5)
     .style('shape-rendering', 'crispedges')
-    .attr('d', 'M-1,1 l2,-2
-                M0,4 l4,-4
-                M3,5 l2,-2')
+    .attr('d', 'M-1,1 l2,-2 M0,4 l4,-4 M3,5 l2,-2')
 
   vis.selectAll('.neighborhood')
     .data(neighborhoods.features)
@@ -79,7 +67,6 @@ d3.json 'data/neighborhoods.json', (pdx) ->
     .classed('unclaimed', (d) -> d.properties.NAME.toLowerCase().indexOf('unclaimed') != -1)
     .classed('shared', (d) -> d.properties.SHARED)
     .attr('d', path)
-
 
 $ ->
   vis = d3.select(document.body).append('svg')

@@ -1,5 +1,5 @@
 window.__mappings =
-  'White Population': [['P008004', 'P008011'], ['P0010001', 'P0050011']]
+  'White Population': [['P008003', 'P008011'], ['P0050003', 'P0050011']]
 
 
 
