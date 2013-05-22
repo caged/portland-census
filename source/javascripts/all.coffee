@@ -1,16 +1,15 @@
 #= require mappings
 
 width  = 800
-height = 800
+height = 700
 vis    = null
 places = null
 neighborhoods = null
 
-fill = d3.scale.log().range ['#6cd7ff', "#006bbb"]
+fill = d3.scale.log().clamp(true).range ['#bae2ff', "#006bbb"]
 projection = d3.geo.albers().rotate([120])
 path = d3.geo.path().projection(projection)
 
-#d3.json 'data/pdx-topo.json', (pdx) ->
 d3.json 'data/neighborhoods.json', (pdx) ->
   neighborhoods = topojson.feature pdx, pdx.objects.neighborhoods
 
@@ -31,7 +30,7 @@ d3.json 'data/neighborhoods.json', (pdx) ->
     .attr('width', 4)
     .attr('height', 4)
   .append('path')
-    .style('stroke', '#e1e1e1')
+    .style('stroke', '#ccc')
     .style('stroke-width', 0.5)
     .style('shape-rendering', 'crispedges')
     .attr('d', 'M-1,1 l2,-2 M0,4 l4,-4 M3,5 l2,-2')
@@ -68,14 +67,17 @@ $ ->
 
 highlight = (subject, type) ->
   [min, max] = d3.extent places, (d) -> d.value[subject][type]
-
+  min = 0.1 if min is 0
   fill.domain [min, max]
 
   vis.selectAll('.neighborhood:not(.shared):not(.unclaimed)')
     .style 'fill', (d) ->
       name = d.properties.NAME
       place = places.filter((p) -> p.key == name)[0]
-      fill(place.value[subject][type])
+      count = place.value[subject][type]
+      count = -1 if count == 0
+      console.log count, fill(count), fill.domain()
+      fill(count)
 
 mapDataToNeighborhoods = (data) ->
   nhoods = {}
@@ -83,15 +85,15 @@ mapDataToNeighborhoods = (data) ->
     name = hood.properties.NAME
     shared = hood.properties.SHARED
 
-    if !shared?
+    if !shared && !shouldExcludeNeighborhood(name)
       current = nhoods[name] = {}
       current[2010] = data[2010].filter((d) -> d.NEIGHBORHOOD == name)[0]
       current[2000] = data[2000].filter((d) -> d.NEIGHBORHOOD == name)[0]
 
       for key, ids of window.__mappings
         try
-          from = d3.sum(ids[0].map (id) -> current[2000][id])
-          to   = d3.sum(ids[1].map (id) -> current[2010][id])
+          from   = d3.sum(ids[0].map (id) -> current[2000][id])
+          to     = d3.sum(ids[1].map (id) -> current[2010][id])
           change = to - from
           growth = parseFloat ((change / from) * 100).toFixed(2)
           current[key] = [from, to, change, growth]
@@ -102,6 +104,10 @@ mapDataToNeighborhoods = (data) ->
       delete current[2010]
 
   places = d3.entries(nhoods).filter (nh) -> !shouldExcludeNeighborhood(nh.key)
+  for place in places
+    console.log place.key, place.value['Asian Population'][0]
+
+  highlight 'White Population', 0
 
 loadCensusData = (callback) ->
   out  = {}
