@@ -44,8 +44,7 @@ d3.json 'data/neighborhoods.json', (pdx) ->
             vals2000 = d3.sum ids[0].map (id) -> current[2000][id]
           catch e
             console.log "ERROR!!!! #{e}"
-
-          console.log name, key, vals2000
+            console.log name, key, vals2000
 
           # for yeargroup in ids
           #   console.log "#{key} #{i}"
@@ -54,12 +53,33 @@ d3.json 'data/neighborhoods.json', (pdx) ->
           #   d3.sum current[2000]
           # ]
 
+          # <pattern id="diagonalHatch" patternUnits="userSpaceOnUse" width="4" height="4">
+          #   <path d="M-1,1 l2,-2
+          #            M0,4 l4,-4
+          #            M3,5 l2,-2" />
+          # </pattern>
+
+  vis.append('defs').append('pattern')
+    .attr('id', 'hatch')
+    .attr('patternUnits', 'userSpaceOnUse')
+    .attr('width', 4)
+    .attr('height', 4)
+  .append('path')
+    .style('stroke', '#e1e1e1')
+    .style('stroke-width', 0.5)
+    .style('shape-rendering', 'crispedges')
+    .attr('d', 'M-1,1 l2,-2
+                M0,4 l4,-4
+                M3,5 l2,-2')
+
   vis.selectAll('.neighborhood')
     .data(neighborhoods.features)
   .enter().append('path')
     .attr('class', (d) -> "neighborhood #{d.properties.NAME.toLowerCase().replace(/\s+/, '-')}")
+    .classed('unclaimed', (d) -> d.properties.NAME.toLowerCase().indexOf('unclaimed') != -1)
     .classed('shared', (d) -> d.properties.SHARED)
     .attr('d', path)
+
 
 $ ->
   vis = d3.select(document.body).append('svg')

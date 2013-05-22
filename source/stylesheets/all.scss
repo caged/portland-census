@@ -21,6 +21,10 @@ body {
   }
 
   &.shared {
-    fill: #fff;
+    fill: url('#hatch');
+  }
+
+  &.unclaimed {
+    fill: url('#hatch');
   }
 }
