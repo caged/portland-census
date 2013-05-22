@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+# require 'csv'
+# require 'pathname'
+
+# CSV.foreach('raw/portland-2010-census.csv', :headers => true) do |row|
+#   puts row.inspect
+# end
