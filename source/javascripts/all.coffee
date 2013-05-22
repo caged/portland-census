@@ -30,7 +30,7 @@ d3.json 'data/neighborhoods.json', (pdx) ->
     .attr('width', 4)
     .attr('height', 4)
   .append('path')
-    .style('stroke', '#ccc')
+    .style('stroke', '#999')
     .style('stroke-width', 0.5)
     .style('shape-rendering', 'crispedges')
     .attr('d', 'M-1,1 l2,-2 M0,4 l4,-4 M3,5 l2,-2')
@@ -78,6 +78,17 @@ highlight = (subject, type) ->
       count = -1 if count == 0
       console.log count, fill(count), fill.domain()
       fill(count)
+    # .datum((d) ->
+    #   name = d.properties.NAME
+    #   places.filter((p) -> p.key == name)[0])
+    .on 'mouseover', (d) ->
+      name = d.properties.NAME
+      place = places.filter((p) -> p.key == name)[0]
+      container = d3.select('.js-info').html(' ')
+      container.append('h2').text(name)
+
+
+
 
 mapDataToNeighborhoods = (data) ->
   nhoods = {}
@@ -104,9 +115,6 @@ mapDataToNeighborhoods = (data) ->
       delete current[2010]
 
   places = d3.entries(nhoods).filter (nh) -> !shouldExcludeNeighborhood(nh.key)
-  for place in places
-    console.log place.key, place.value['Asian Population'][0]
-
   highlight 'White Population', 0
 
 loadCensusData = (callback) ->
