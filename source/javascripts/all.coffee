@@ -49,25 +49,33 @@ $ ->
     .attr('width', width)
     .attr('height', height)
 
-  menu = d3.select('.js-menu').on 'change', (d) ->
-    key = d3.event.target.value
-    highlight key
+  menu = d3.select('.js-menu-subject').on 'change', (d) ->
+    subject = d3.event.target.value
+    type = d3.select('.js-menu-type').node().selectedIndex
+    highlight subject, type
+
+  d3.select('.js-menu-type').on 'change', (d) ->
+    subjectMenu = d3.select '.js-menu-subject'
+    type = d3.event.target.selectedIndex
+    subjectIndex = subjectMenu.node().selectedIndex
+    subject = d3.select(subjectMenu.node().options[subjectIndex]).attr 'value'
+    highlight subject, type
 
   for key of __mappings
     menu.append('option')
       .attr('value', key)
       .text(key)
 
-highlight = (key) ->
-  [min, max] = d3.extent places, (d) -> d.value[key][1]
+highlight = (subject, type) ->
+  [min, max] = d3.extent places, (d) -> d.value[subject][type]
+
   fill.domain [min, max]
+
   vis.selectAll('.neighborhood:not(.shared):not(.unclaimed)')
-    .style('fill', (d) ->
+    .style 'fill', (d) ->
       name = d.properties.NAME
       place = places.filter((p) -> p.key == name)[0]
-      console.log place, name
-      fill(place.value[key][0])
-    )
+      fill(place.value[subject][type])
 
 mapDataToNeighborhoods = (data) ->
   nhoods = {}
