@@ -34,6 +34,20 @@ header {
   }
 }
 
+footer {
+  display: block;
+  box-sizing: border-box;
+  padding: 20px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: #f7f7f7;
+  font-size: 11px;
+  color: #bbb;
+  border-top: 1px solid #eee;
+  text-align: right;
+}
+
 .sidebar {
   position: absolute;
   top: 64px;
@@ -111,7 +125,7 @@ select {
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
   font-size: 12px;
   border-radius: 2px;
-  width: 300px;
+  width: 320px;
 
   h3 {
     padding: 10px;

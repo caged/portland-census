@@ -1,7 +1,7 @@
 #= require mappings
 
 width  = 900
-height = 700
+height = 620
 vis    = null
 places = null
 neighborhoods = null
