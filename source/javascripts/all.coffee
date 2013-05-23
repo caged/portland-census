@@ -1,6 +1,6 @@
 #= require mappings
 
-width  = 800
+width  = 900
 height = 700
 vis    = null
 places = null
@@ -13,8 +13,7 @@ path = d3.geo.path().projection(projection)
 d3.json 'data/neighborhoods.json', (pdx) ->
   neighborhoods = topojson.feature pdx, pdx.objects.neighborhoods
 
-  projection.scale(1)
-    .translate [0, 0]
+  projection.scale(1).translate [0, 0]
 
   b = path.bounds(neighborhoods)
   s = .95 / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height)
@@ -87,9 +86,6 @@ highlight = (subject, type) ->
       container = d3.select('.js-info').html(' ')
       container.append('h2').text(name)
 
-
-
-
 mapDataToNeighborhoods = (data) ->
   nhoods = {}
   for hood in neighborhoods.features
@@ -115,7 +111,7 @@ mapDataToNeighborhoods = (data) ->
       delete current[2010]
 
   places = d3.entries(nhoods).filter (nh) -> !shouldExcludeNeighborhood(nh.key)
-  highlight 'White Population', 0
+  highlight 'Total Population', 0
 
 loadCensusData = (callback) ->
   out  = {}
