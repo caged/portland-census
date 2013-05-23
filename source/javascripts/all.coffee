@@ -128,6 +128,7 @@ mapDataToNeighborhoods = (data) ->
           to     = d3.sum(ids[1].map (id) -> current[2010][id])
           change = to - from
           growth = parseFloat ((change / from) * 100).toFixed(2)
+          growth = 100 if !isFinite growth
           current[key] = [from, to, change, growth]
         catch e
           console.log "ERROR!!!! #{e} #{name} #{key}"
