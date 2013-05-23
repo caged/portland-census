@@ -1,0 +1,22 @@
+{
+  "name": "d3-tip",
+  "version": "0.5.2",
+  "main": "src/d3.tip.js",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components"
+  ],
+  "dependencies": {
+    "d3": "3.1.5"
+  },
+  "gitHead": "d7cf4e4d1efb87fc7984bf2cf5a528141545b475",
+  "readme": "# d3.tip: Tooltips for d3.js visualizations\n\n![](https://github-images.s3.amazonaws.com/skitch/Screen_Shot_2013-04-08_at_11.40.10_AM-20130408-114054.png)\n\n### API Docs\n[API Documentation](docs/index.md)\n\n### Download Latest Version\n* [Production Version](https://raw.github.com/Caged/d3-tip/v0.5.2/d3.tip.min.js) : **3kb** / **~1kb gzipped**\n* [Development Version](https://raw.github.com/Caged/d3-tip/v0.5.2/src/d3.tip.js) : **6kb** / **~2kb gzipped**\n\n### Install with Bower\n```\nbower install Caged/d3-tip\n```\n*Note the capital \"C\"*\n\n### Quick Usage\n``` javascript\n\n/* Initialize tooltip */\ntip = d3.tip().html(function(d) { return d; });\n\n/* Invoke the tip in the context of your visualization */\nvis.call(tip)\n\nvis.selectAll('rect')\n  .data(data)\n.enter().append('rect')\n  .attr('width', function() { return x.rangeBand() })\n  .attr('height', function(d) { return h - y(d) })\n  .attr('y', function(d) { return y(d) })\n  .attr('x', function(d, i) { return x(i) })\n  /* Show and hide tip on mouse events */\n  .on('mouseover', tip.show)\n  .on('mouseout', tip.hide)\n```\n",
+  "readmeFilename": "README.md",
+  "_id": "d3-tip@0.5.2",
+  "description": "![](https://github-images.s3.amazonaws.com/skitch/Screen_Shot_2013-04-08_at_11.40.10_AM-20130408-114054.png)",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Caged/d3-tip.git"
+  }
+}
