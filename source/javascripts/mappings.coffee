@@ -23,3 +23,4 @@ window.__mappings =
   'Black Population': [['P01000411'], ['P007000411'], colors]
   'Hispanic Population': [['P008011', 'P008012', 'P008013', 'P008014', 'P008015', 'P008016', 'P008017'], ['P0050011', 'P0050012', 'P0050013', 'P0050014', 'P0050015', 'P0050016', 'P0050017'], colors]
   'Asian Population': [['P01000613'], ['P007000613'], colors]
+  'Total Housing Units': [['H001001'], ['H0010001'], colors]
