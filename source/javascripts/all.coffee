@@ -6,9 +6,10 @@ vis    = null
 places = null
 neighborhoods = null
 
-fill = d3.scale.log().clamp(true).range ['#bae2ff', "#006bbb"]
-projection = d3.geo.albers().rotate([120])
-path = d3.geo.path().projection(projection)
+fill        = d3.scale.log().clamp(true).range ['#bae2ff', "#006bbb"]
+intensity   = d3.scale.quantile()
+projection  = d3.geo.albers().rotate([120])
+path        = d3.geo.path().projection(projection)
 
 d3.json 'data/neighborhoods.json', (pdx) ->
   neighborhoods = topojson.feature pdx, pdx.objects.neighborhoods
@@ -65,9 +66,14 @@ $ ->
       .text(key)
 
 highlight = (subject, type) ->
+  colors = __mappings[subject][2]
   [min, max] = d3.extent places, (d) -> d.value[subject][type]
   min = 0.1 if min is 0
-  fill.domain [min, max]
+
+  intensity.domain([min, max]).range(colors)
+
+  # Logarithmic scale
+  #fill.domain [min, max]
 
   vis.selectAll('.neighborhood:not(.shared):not(.unclaimed)')
     .style 'fill', (d) ->
@@ -75,11 +81,7 @@ highlight = (subject, type) ->
       place = places.filter((p) -> p.key == name)[0]
       count = place.value[subject][type]
       count = -1 if count == 0
-      console.log count, fill(count), fill.domain()
-      fill(count)
-    # .datum((d) ->
-    #   name = d.properties.NAME
-    #   places.filter((p) -> p.key == name)[0])
+      intensity(count)
     .on 'mouseover', (d) ->
       name = d.properties.NAME
       place = places.filter((p) -> p.key == name)[0]
