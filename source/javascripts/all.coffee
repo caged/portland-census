@@ -11,6 +11,26 @@ intensity   = d3.scale.quantile()
 projection  = d3.geo.albers().rotate([120])
 path        = d3.geo.path().projection(projection)
 
+tip = d3.tip().attr('class', 'tip').html (d) ->
+  format = d3.format ','
+  "<h3>#{d.name} <span>#{d.subject}</span></h3>
+  <table>
+    <tr>
+      <th>2000</th>
+      <th>2010</th>
+      <th>Change</th>
+      <th>% Change</th>
+    </tr>
+    <tr>
+      <td>#{format d.data[0]}</td>
+      <td>#{format d.data[1]}</td>
+      <td>#{format d.data[2]}</td>
+      <td>#{d.data[3]}</td>
+    </tr>
+  </table>
+  "
+
+
 d3.json 'data/neighborhoods.json', (pdx) ->
   neighborhoods = topojson.feature pdx, pdx.objects.neighborhoods
 
@@ -47,6 +67,7 @@ $ ->
   vis = d3.select('.js-map').append('svg')
     .attr('width', width)
     .attr('height', height)
+    .call(tip)
 
   menu = d3.select('.js-menu-subject').on 'change', (d) ->
     subject = d3.event.target.value
@@ -82,11 +103,13 @@ highlight = (subject, type) ->
       count = place.value[subject][type]
       count = -1 if count == 0
       intensity(count)
-    .on 'mouseover', (d) ->
+    .on('mouseover', (d) ->
       name = d.properties.NAME
       place = places.filter((p) -> p.key == name)[0]
       container = d3.select('.js-info').html(' ')
       container.append('h2').text(name)
+      tip.show name: name, subject: subject, data: place.value[subject])
+    .on 'mouseout', tip.hide
 
 mapDataToNeighborhoods = (data) ->
   nhoods = {}
