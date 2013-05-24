@@ -1,6 +1,6 @@
 # Map human readable labels to fields in the CSV files.
 #
-#  KEY: [2000, 2010]
+#  KEY: [2000, 2010, colors]
 #
 # If an array is given for a year, all values will be summed together to get
 # a resulting value
@@ -17,6 +17,7 @@ colors = [
   '#a2503a'
   '#793738'
 ]
+
 window.__mappings =
   'Total Population': [['P001001'], ['P0010001'], colors]
   'White Population': [['P01000310'], ['P007000310'], colors]
