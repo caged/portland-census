@@ -6,12 +6,11 @@ vis    = null
 places = null
 neighborhoods = null
 
-fill        = d3.scale.log().clamp(true).range ['#bae2ff', "#006bbb"]
 intensity   = d3.scale.quantile()
 projection  = d3.geo.albers().rotate([120])
 path        = d3.geo.path().projection(projection)
 
-tip = d3.tip().attr('class', 'tip').html (d) ->
+tip = d3.tip().attr('class', 'tip').offset([-3, 0]).html (d) ->
   format = d3.format ','
   "<h3>#{d.name} <span>#{d.subject}</span></h3>
   <table>
@@ -29,7 +28,6 @@ tip = d3.tip().attr('class', 'tip').html (d) ->
     </tr>
   </table>
   "
-
 
 d3.json 'data/neighborhoods.json', (pdx) ->
   neighborhoods = topojson.feature pdx, pdx.objects.neighborhoods
@@ -86,22 +84,21 @@ $ ->
       .attr('value', key)
       .text(key)
 
+# Highlight a specific census category
+#
+# subject - Name of the census mapping
+# type    - Index of type (2000, 2010, total change, % growth)
 highlight = (subject, type) ->
   colors = __mappings[subject][2]
   [min, max] = d3.extent places, (d) -> d.value[subject][type]
-  min = 0.1 if min is 0
 
   intensity.domain([min, max]).range(colors)
-
-  # Logarithmic scale
-  #fill.domain [min, max]
 
   vis.selectAll('.neighborhood:not(.shared):not(.unclaimed)')
     .style 'fill', (d) ->
       name = d.properties.NAME
       place = places.filter((p) -> p.key == name)[0]
       count = place.value[subject][type]
-      count = -1 if count == 0
       intensity(count)
     .on('mouseover', (d) ->
       name = d.properties.NAME
@@ -111,6 +108,10 @@ highlight = (subject, type) ->
       tip.show name: name, subject: subject, data: place.value[subject])
     .on 'mouseout', tip.hide
 
+# Map topojson neighborhood data to census data mappings specified in mappings.coffee
+#
+# data - Census topojson data
+#
 mapDataToNeighborhoods = (data) ->
   nhoods = {}
   for hood in neighborhoods.features
@@ -139,6 +140,7 @@ mapDataToNeighborhoods = (data) ->
   places = d3.entries(nhoods).filter (nh) -> !shouldExcludeNeighborhood(nh.key)
   highlight 'Total Population', 0
 
+# Load census data csv files
 loadCensusData = (callback) ->
   out  = {}
   years  = [2000, 2010]
@@ -153,5 +155,9 @@ loadCensusData = (callback) ->
       out[years[index]] = data
       callback(out) if index == 1
 
+# Should we exclude a neighoborhood from being highlighted
+# Sometimes we want to draw a neighborhood, but not highlight it with others.
+# For example, Portland has a lot of MC Unclaimed areas and overlapping
+# neighborhoods
 shouldExcludeNeighborhood = (name) ->
   name.toLowerCase().indexOf('unclaimed') != -1
