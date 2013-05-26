@@ -7,8 +7,8 @@ places = null
 neighborhoods = null
 
 intensity   = d3.scale.quantile()
-projection  = d3.geo.albers().rotate([120])
-path        = d3.geo.path().projection(projection)
+projection  = d3.geo.albers().rotate [120]
+path        = d3.geo.path().projection projection
 
 tip = d3.tip().attr('class', 'tip').offset([-3, 0]).html (d) ->
   format = d3.format ','
@@ -103,8 +103,6 @@ highlight = (subject, type) ->
     .on('mouseover', (d) ->
       name = d.properties.NAME
       place = places.filter((p) -> p.key == name)[0]
-      container = d3.select('.js-info').html(' ')
-      container.append('h2').text(name)
       tip.show name: name, subject: subject, data: place.value[subject])
     .on 'mouseout', tip.hide
 
@@ -155,9 +153,9 @@ loadCensusData = (callback) ->
       out[years[index]] = data
       callback(out) if index == 1
 
-# Should we exclude a neighoborhood from being highlighted
+# Should we exclude a neighoborhood from being highlighted.
 # Sometimes we want to draw a neighborhood, but not highlight it with others.
 # For example, Portland has a lot of MC Unclaimed areas and overlapping
-# neighborhoods
+# neighborhood boundaries.
 shouldExcludeNeighborhood = (name) ->
   name.toLowerCase().indexOf('unclaimed') != -1
