@@ -1,5 +1,5 @@
 #= require mappings
-
+years  = [2000, 2010]
 width  = 900
 height = 620
 vis    = null
@@ -141,17 +141,17 @@ mapDataToNeighborhoods = (data) ->
 # Load census data csv files
 loadCensusData = (callback) ->
   out  = {}
-  years  = [2000, 2010]
-  index = -1
+  index = 0
   for year in years
     d3.csv "data/portland-neighborhood-demographics-#{year}.csv", (data) ->
-      index += 1
       data.map (row) ->
         for key, val of row
           row[key] = parseFloat val if key isnt 'NEIGHBORHOOD'
         row
       out[years[index]] = data
       callback(out) if index == 1
+      index += 1
+
 
 # Should we exclude a neighoborhood from being highlighted.
 # Sometimes we want to draw a neighborhood, but not highlight it with others.
