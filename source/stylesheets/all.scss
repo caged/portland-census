@@ -8,6 +8,10 @@ body {
   margin: 0;
 }
 
+////////////////////////////////////////////////////////////////////////////////
+// =structure
+////////////////////////////////////////////////////////////////////////////////
+
 header {
   background: #fff;
   padding: 21px 20px 20px 20px;
@@ -35,7 +39,7 @@ header {
 }
 
 footer {
-  display: block;
+  display: none;
   box-sizing: border-box;
   padding: 20px;
   position: absolute;
@@ -52,7 +56,7 @@ footer {
   position: absolute;
   top: 64px;
   bottom: 0;
-  width: 300px;
+  width: 400px;
   background: #f1f1f1;
   border-right: 1px solid #eaeaea;
   box-shadow: 1px 0 0 rgba(255, 255, 255, 0.9);
@@ -72,7 +76,9 @@ footer {
   margin-left: 300px;
 }
 
-/* map */
+////////////////////////////////////////////////////////////////////////////////
+// =map
+////////////////////////////////////////////////////////////////////////////////
 .outline {
   fill: #ddd;
 }
@@ -90,7 +96,9 @@ footer {
   }
 }
 
-// forms
+////////////////////////////////////////////////////////////////////////////////
+// =forms
+////////////////////////////////////////////////////////////////////////////////
 select {
   font-family: "Helvetica Neue", Helvetica, sans-serif;
   font-weight: bold;
@@ -119,7 +127,9 @@ select {
   }
 }
 
-//tooltip
+////////////////////////////////////////////////////////////////////////////////
+// =tooltips
+////////////////////////////////////////////////////////////////////////////////
 .tip {
   background: #fff;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
@@ -158,4 +168,36 @@ select {
     padding: 10px;
     border-bottom: 1px solid #f7f7f7;
   }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// =legend                                                                    //
+////////////////////////////////////////////////////////////////////////////////
+.legend {
+  width: 100%;
+  font-size: 12px;
+  color: #555;
+}
+
+.legend th {
+  font-weight: bold;
+  padding: 10px;
+  text-align: left;
+  color: #111;
+  background: #e3e3e3;
+  border-bottom: 1px solid #ddd;
+  border-top: 1px solid #ddd;
+}
+
+.entry td {
+  padding: 10px 10px;
+  border-bottom: 1px solid #e4e4e4;
+}
+
+.up {
+  color: #0a0;
+}
+
+.down {
+  color: #e30;
 }

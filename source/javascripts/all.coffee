@@ -6,6 +6,7 @@ vis    = null
 places = null
 neighborhoods = null
 legend = null
+format = d3.format ','
 colors = [
   '#ffeca7'
   '#ffdd8c'
@@ -24,7 +25,6 @@ projection  = d3.geo.albers().rotate [120]
 path        = d3.geo.path().projection projection
 
 tip = d3.tip().attr('class', 'tip').offset([-3, 0]).html (d) ->
-  format = d3.format ','
   "<h3>#{d.name} <span>#{d.subject}</span></h3>
   <table>
     <tr>
@@ -79,6 +79,8 @@ $ ->
     .attr('width', width)
     .attr('height', height)
     .call(tip)
+
+  legend = d3.select '.js-entries'
 
   menu = d3.select('.js-menu-subject').on 'change', (d) ->
     subject = d3.event.target.value
@@ -141,7 +143,7 @@ mapDataToNeighborhoods = (data) ->
           from   = d3.sum(ids[0].map (id) -> current[2000][id])
           to     = d3.sum(ids[1].map (id) -> current[2010][id])
           change = to - from
-          growth = parseFloat ((change / from) * 100).toFixed(2)
+          growth = parseFloat ((change / from) * 100).toFixed(1)
           growth = 100 if !isFinite growth
           current[key] = [from, to, change, growth]
         catch e
@@ -166,6 +168,29 @@ loadCensusData = (callback) ->
       out[years[index]] = data
       callback(out) if index == 1
       index += 1
+
+updateInfo = (subject, type, data) ->
+  nhoods = places.map((place) -> name: place.key, value: place.value[subject])
+    .sort((a, b) ->
+      d3.descending a.value[type], b.value[type]
+    )[0..19]
+  [min, max] = d3.extent nhoods, (d) -> d.value[type]
+
+  legend.selectAll('.entry').remove()
+  legend.selectAll('.entry')
+      .data(nhoods, (d) -> d.name)
+    .enter().append('tr')
+      .html((d, i) ->
+        change = d.value[3]
+        changeClass = if change < 0 then 'down' else 'up'
+        changeClass = null if change is 0
+        "<tr>
+          <td class='rank'>#{i + 1}.</td>
+          <td>#{d.name}</td>
+          <td class='val'>#{format(d.value[type])}</td>
+          <td class='change #{changeClass}'>#{format(change)}%</td>
+        </tr>
+      ").attr('class', 'entry')
 
 
 # Should we exclude a neighoborhood from being highlighted.
