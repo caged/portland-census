@@ -5,6 +5,19 @@ height = 620
 vis    = null
 places = null
 neighborhoods = null
+legend = null
+colors = [
+  '#ffeca7'
+  '#ffdd8c'
+  '#ffdd7c'
+  '#fba447'
+  '#f68736'
+  '#f37636'
+  '#ca6632'
+  '#c0513f'
+  '#a2503a'
+  '#793738'
+]
 
 intensity   = d3.scale.quantile()
 projection  = d3.geo.albers().rotate [120]
@@ -89,10 +102,12 @@ $ ->
 # subject - Name of the census mapping
 # type    - Index of type (2000, 2010, total change, % growth)
 highlight = (subject, type) ->
-  colors = __mappings[subject][2]
+  colorRange = __mappings[subject][2] ?= colors
   [min, max] = d3.extent places, (d) -> d.value[subject][type]
 
-  intensity.domain([min, max]).range(colors)
+  updateInfo subject, type, __mappings[subject]
+
+  intensity.domain([min, max]).range colorRange
 
   vis.selectAll('.neighborhood:not(.shared):not(.unclaimed)')
     .style 'fill', (d) ->
