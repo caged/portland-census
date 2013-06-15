@@ -30,14 +30,14 @@ tip = d3.tip().attr('class', 'tip').offset([-3, 0]).html (d) ->
     <tr>
       <th>2000</th>
       <th>2010</th>
-      <th>Change</th>
       <th>% Change</th>
+      <th>+/-</th>
     </tr>
     <tr>
       <td>#{format d.data[0]}</td>
       <td>#{format d.data[1]}</td>
-      <td>#{format d.data[2]}</td>
       <td>#{d.data[3]}</td>
+      <td>#{format d.data[2]}</td>
     </tr>
   </table>
   "
