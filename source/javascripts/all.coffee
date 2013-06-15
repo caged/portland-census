@@ -83,16 +83,12 @@ $ ->
   legend = d3.select '.js-entries'
 
   menu = d3.select('.js-menu-subject').on 'change', (d) ->
-    subject = d3.event.target.value
-    type = d3.select('.js-menu-type').node().selectedIndex
-    highlight subject, type
+    filters = getFilterParams()
+    highlight filters.subject, filters.type
 
   d3.select('.js-menu-type').on 'change', (d) ->
-    subjectMenu = d3.select '.js-menu-subject'
-    type = d3.event.target.selectedIndex
-    subjectIndex = subjectMenu.node().selectedIndex
-    subject = d3.select(subjectMenu.node().options[subjectIndex]).attr 'value'
-    highlight subject, type
+    filters = getFilterParams()
+    highlight filters.subject, filters.type
 
   for key of __mappings
     menu.append('option')
@@ -169,11 +165,10 @@ loadCensusData = (callback) ->
       callback(out) if index == 1
       index += 1
 
-updateInfo = (subject, type, data) ->
+updateInfo = (subject, type, data, sort = 'desc') ->
   nhoods = places.map((place) -> name: place.key, value: place.value[subject])
-    .sort((a, b) ->
-      d3.descending a.value[type], b.value[type]
-    )[0..19]
+    .sort((a, b) -> d3.descending a.value[type], b.value[type])[0..19]
+
   [min, max] = d3.extent nhoods, (d) -> d.value[type]
 
   legend.selectAll('.entry').remove()
@@ -192,6 +187,15 @@ updateInfo = (subject, type, data) ->
         </tr>
       ").attr('class', 'entry')
 
+getFilterParams = ->
+  subjectMenu = d3.select '.js-menu-subject'
+  typeMenu   = d3.select '.js-menu-type'
+  subjectIndex = subjectMenu.node().selectedIndex
+  typeIndex    = typeMenu.node().selectedIndex
+  subject = d3.select(subjectMenu.node().options[subjectIndex]).attr 'value'
+  type    = typeIndex
+
+  {subject, type}
 
 # Should we exclude a neighoborhood from being highlighted.
 # Sometimes we want to draw a neighborhood, but not highlight it with others.
