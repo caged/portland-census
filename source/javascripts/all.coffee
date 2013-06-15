@@ -86,6 +86,33 @@ $ ->
     filters = getFilterParams()
     highlight filters.subject, filters.type
 
+  d3.selectAll('.js-sort').on 'click', ->
+    event = d3.event
+    event.preventDefault()
+    params = d3.select(this).attr('href')
+      .substr(1)
+      .split('&')
+      .map (val) -> val.split '='
+
+    filters = getFilterParams()
+    sort = params.filter((p) -> p[0] == 'dir')[0]
+    type = params.filter((p) -> p[0] == 'prop')[0]
+
+    type = if type[1] is 'change'
+      3
+    else
+      if filters.type is '2010' then 1 else 0
+
+    query = []
+    for param in params
+      [key, val] = param
+      val = (if val is 'asc' then 'desc' else 'asc') if key == 'dir'
+      query.push "#{key}=#{val}"
+
+    d3.select(this).attr 'href', "?#{query.join('&')}"
+
+    updateInfo filters.subject, type, __mappings[filters.subject], sort[1]
+
   d3.select('.js-menu-type').on 'change', (d) ->
     filters = getFilterParams()
     highlight filters.subject, filters.type
@@ -166,8 +193,9 @@ loadCensusData = (callback) ->
       index += 1
 
 updateInfo = (subject, type, data, sort = 'desc') ->
+  sortFunc = if sort == 'desc' then d3.descending else d3.ascending
   nhoods = places.map((place) -> name: place.key, value: place.value[subject])
-    .sort((a, b) -> d3.descending a.value[type], b.value[type])[0..19]
+    .sort((a, b) -> sortFunc a.value[type], b.value[type])[0..19]
 
   [min, max] = d3.extent nhoods, (d) -> d.value[type]
 
