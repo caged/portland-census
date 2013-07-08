@@ -24,14 +24,14 @@ header {
   font-weight: bold;
   margin-bottom: 0px;
   color: #fff;
-  border-bottom: 1px solid #222;
+  border-bottom: 1px solid #333;
   font-size: 24px;
 
   &:before {
     content: " ";
     display: block;
     height: 6px;
-    background-image: linear-gradient(to right, #00a1ff 25%, #ff7800 50%, #c500cc 100%);
+    background-image: linear-gradient(to right, #c500cc 25%, #00a1ff 50%, #8efc2d 100%);
     position: absolute;
     top: 0;
     left: 0;
@@ -40,7 +40,7 @@ header {
 
   .controls {
     float: right;
-    margin-top: -22px;
+    margin-top: -25px;
   }
 }
 
@@ -102,37 +102,6 @@ svg {
 
   &.shared, &.unclaimed {
     fill: url('#hatch');
-  }
-}
-
-////////////////////////////////////////////////////////////////////////////////
-// =forms
-////////////////////////////////////////////////////////////////////////////////
-select {
-  font-family: "Helvetica Neue", Helvetica, sans-serif;
-  font-weight: bold;
-  -webkit-appearance: none;
-  background-image: linear-gradient(#f7f7f7, #eee);
-  border: 1px solid #e1e1e1;
-  padding: 5px 5px 5px 10px;
-  border-radius: 3px;
-  position: relative;
-}
-
-.select {
-  display: inline-block;
-  position: relative;
-
-  &:after {
-    font-size: 8px;
-    display: inline;
-    line-height: 1;
-    color: #aaa;
-    content: "\25BC";
-    right: 10px;
-    top: 11px;
-    position: absolute;
-    pointer-events: none;
   }
 }
 
