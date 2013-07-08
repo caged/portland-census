@@ -49,7 +49,7 @@ d3.json 'data/neighborhoods.json', (pdx) ->
   width = $('.js-map').outerWidth()
 
   b = path.bounds(neighborhoods)
-  s = .99 / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height)
+  s = .89 / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height)
   t = [(width - s * (b[1][0] + b[0][0])) / 2, (height - s * (b[1][1] + b[0][1])) / 2]
 
   projection.scale(s).translate(t)
@@ -62,7 +62,7 @@ d3.json 'data/neighborhoods.json', (pdx) ->
     .attr('width', 4)
     .attr('height', 4)
   .append('path')
-    .style('stroke', '#999')
+    .style('stroke', '#777')
     .style('stroke-width', 0.5)
     .style('shape-rendering', 'crispedges')
     .attr('d', 'M-1,1 l2,-2 M0,4 l4,-4 M3,5 l2,-2')
@@ -128,7 +128,6 @@ $ ->
 # subject - Name of the census mapping
 # type    - Index of type (2000, 2010, total change, % growth)
 highlight = (subject, type) ->
-  console.log subject, type
   colorRange = __mappings[subject][2] ?= colors
   [min, max] = d3.extent places, (d) -> d.value[subject][type]
 
@@ -142,7 +141,6 @@ highlight = (subject, type) ->
       place = places.filter((p) -> p.key == name)[0]
       count = place.value[subject][type]
       intensity(count))
-    .style('fill-opacity', 0.5)
     .style('stroke', (d) ->
       name = d.properties.name
       place = places.filter((p) -> p.key == name)[0]

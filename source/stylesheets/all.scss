@@ -18,12 +18,13 @@ a {
 ////////////////////////////////////////////////////////////////////////////////
 
 header {
-  background: #fff;
+  background: #111;
   padding: 21px 20px 20px 20px;
   display: block;
   font-weight: bold;
   margin-bottom: 0px;
-  color: #333;
+  color: #fff;
+  border-bottom: 1px solid #222;
 
   &:before {
     content: " ";
@@ -61,16 +62,16 @@ footer {
   top: 58px;
   bottom: 0;
   width: 400px;
-  background: #222;
-  border-right: 1px solid #333;
+  background: #111;
+  border-right: 1px solid #222;
   overflow: auto;
 
   h2 {
     font-size: 12px;
     padding: 10px 10px 10px 20px;
     font-weight: bold;
-    background: #222;
-    border-bottom: 1px solid #333;
+    background: #111;
+    border-bottom: 1px solid #222;
     color: #555;
   }
 }
@@ -89,7 +90,7 @@ footer {
 .neighborhood {
   fill: #e5e5e5;
   fill-opacity: 0.8;
-  stroke: #fff;
+  stroke: #555;
   stroke-width: 0.5;
   shape-rendering: geometricprecision;
 
@@ -187,14 +188,13 @@ select {
   padding: 10px;
   text-align: left;
   color: #fff;
-  background: #222;
-  border-bottom: 1px solid #333;
-  border-top: 1px solid #333;
+  background: #111;
+  border-bottom: 1px solid #222;
 }
 
 .entry td {
   padding: 10px 10px;
-  border-bottom: 1px solid #333;
+  border-bottom: 1px solid #222;
 }
 
 .rank {
