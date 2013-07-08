@@ -70,9 +70,9 @@ d3.json 'data/neighborhoods.json', (pdx) ->
   vis.selectAll('.neighborhood')
     .data(neighborhoods.features)
   .enter().append('path')
-    .attr('class', (d) -> "neighborhood #{d.properties.NAME.toLowerCase().replace(/\s+/, '-')}")
-    .classed('unclaimed', (d) -> d.properties.NAME.toLowerCase().indexOf('unclaimed') != -1)
-    .classed('shared', (d) -> d.properties.SHARED)
+    .attr('class', (d) -> "neighborhood #{d.properties.name.toLowerCase().replace(/\s+/, '-')}")
+    .classed('unclaimed', (d) -> d.properties.name.toLowerCase().indexOf('unclaimed') != -1)
+    .classed('shared', (d) -> d.properties.shared)
     .attr('d', path)
 
 $ ->
@@ -128,6 +128,7 @@ $ ->
 # subject - Name of the census mapping
 # type    - Index of type (2000, 2010, total change, % growth)
 highlight = (subject, type) ->
+  console.log subject, type
   colorRange = __mappings[subject][2] ?= colors
   [min, max] = d3.extent places, (d) -> d.value[subject][type]
 
@@ -137,12 +138,12 @@ highlight = (subject, type) ->
 
   vis.selectAll('.neighborhood:not(.shared):not(.unclaimed)')
     .style 'fill', (d) ->
-      name = d.properties.NAME
+      name = d.properties.name
       place = places.filter((p) -> p.key == name)[0]
       count = place.value[subject][type]
       intensity(count)
     .on('mouseover', (d) ->
-      name = d.properties.NAME
+      name = d.properties.name
       place = places.filter((p) -> p.key == name)[0]
       tip.show name: name, subject: subject, data: place.value[subject])
     .on 'mouseout', tip.hide
@@ -154,8 +155,8 @@ highlight = (subject, type) ->
 mapDataToNeighborhoods = (data) ->
   nhoods = {}
   for hood in neighborhoods.features
-    name = hood.properties.NAME
-    shared = hood.properties.SHARED
+    name = hood.properties.name
+    shared = hood.properties.shared
 
     if !shared && !shouldExcludeNeighborhood(name)
       current = nhoods[name] = {}
