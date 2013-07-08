@@ -1,7 +1,7 @@
 #= require mappings
 years  = [2000, 2010]
 width  = 900
-height = 620
+height = 680
 vis    = null
 places = null
 neighborhoods = null
@@ -19,6 +19,7 @@ colors = [
   '#a2503a'
   '#793738'
 ]
+
 
 intensity   = d3.scale.quantile()
 projection  = d3.geo.albers().rotate [120]
@@ -46,10 +47,9 @@ d3.json 'data/neighborhoods.json', (pdx) ->
   neighborhoods = topojson.feature pdx, pdx.objects.neighborhoods
 
   projection.scale(1).translate [0, 0]
-  width = $('.js-map').outerWidth()
 
   b = path.bounds(neighborhoods)
-  s = .89 / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height)
+  s = .99 / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height)
   t = [(width - s * (b[1][0] + b[0][0])) / 2, (height - s * (b[1][1] + b[0][1])) / 2]
 
   projection.scale(s).translate(t)
@@ -76,6 +76,7 @@ d3.json 'data/neighborhoods.json', (pdx) ->
     .attr('d', path)
 
 $ ->
+  width = $('.js-map').outerWidth()
   vis = d3.select('.js-map').append('svg')
     .attr('width', width)
     .attr('height', height)

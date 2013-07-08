@@ -25,11 +25,12 @@ header {
   margin-bottom: 0px;
   color: #fff;
   border-bottom: 1px solid #222;
+  font-size: 24px;
 
   &:before {
     content: " ";
     display: block;
-    height: 3px;
+    height: 6px;
     background-image: linear-gradient(to right, #00a1ff 25%, #ff7800 50%, #c500cc 100%);
     position: absolute;
     top: 0;
@@ -59,7 +60,7 @@ footer {
 
 .sidebar {
   position: absolute;
-  top: 58px;
+  top: 66px;
   bottom: 0;
   width: 400px;
   background: #111;
@@ -87,12 +88,16 @@ footer {
   fill: #ddd;
 }
 
+svg {
+  margin-top: 20px;
+}
+
 .neighborhood {
   fill: #e5e5e5;
-  fill-opacity: 0.8;
+  fill-opacity: 0.9;
   stroke: #555;
-  stroke-width: 0.5;
-  shape-rendering: geometricprecision;
+  stroke-width: 1;
+  shape-rendering: crispedges;
 
 
   &.shared, &.unclaimed {
