@@ -5,19 +5,15 @@ height = 680
 vis    = null
 places = null
 neighborhoods = null
-legend = null
+directory = null
 format = d3.format ','
 colors = [
-  '#ffeca7'
-  '#ffdd8c'
-  '#ffdd7c'
-  '#fba447'
-  '#f68736'
-  '#f37636'
-  '#ca6632'
-  '#c0513f'
-  '#a2503a'
-  '#793738'
+  '#0aafed'
+  '#3bbff1'
+  '#6ccff4'
+  '#9ddff8'
+  '#ceeffb'
+  '#fff'
 ]
 
 
@@ -82,7 +78,7 @@ $ ->
     .attr('height', height)
     .call(tip)
 
-  legend = d3.select '.js-entries'
+  directory = d3.select '.js-entries'
 
   menu = d3.select('.js-menu-subject').on 'change', (d) ->
     filters = getFilterParams()
@@ -206,8 +202,8 @@ updateInfo = (subject, type, data, sort = 'desc') ->
 
   [min, max] = d3.extent nhoods, (d) -> d.value[type]
 
-  legend.selectAll('.entry').remove()
-  legend.selectAll('.entry')
+  directory.selectAll('.entry').remove()
+  directory.selectAll('.entry')
       .data(nhoods, (d) -> d.name)
     .enter().append('tr')
       .html((d, i) ->

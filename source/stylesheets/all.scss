@@ -62,7 +62,7 @@ footer {
   position: absolute;
   top: 66px;
   bottom: 0;
-  width: 400px;
+  width: 350px;
   background: #111;
   border-right: 1px solid #222;
   overflow: auto;
@@ -95,7 +95,7 @@ svg {
 .neighborhood {
   fill: #e5e5e5;
   fill-opacity: 0.9;
-  stroke: #555;
+  stroke: #000;
   stroke-width: 1;
   shape-rendering: crispedges;
 
@@ -149,15 +149,15 @@ svg {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-// =legend                                                                    //
+// =directory                                                                 //
 ////////////////////////////////////////////////////////////////////////////////
-.legend {
+.directory {
   width: 100%;
   font-size: 12px;
   color: #777;
 }
 
-.legend th {
+.directory th {
   font-weight: bold;
   padding: 10px;
   text-align: left;
@@ -169,6 +169,10 @@ svg {
 .entry td {
   padding: 10px 10px;
   border-bottom: 1px solid #222;
+}
+
+.entry td:nth-child(2) {
+  color: #bbb;
 }
 
 .rank {
