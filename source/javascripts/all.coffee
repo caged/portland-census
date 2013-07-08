@@ -137,11 +137,17 @@ highlight = (subject, type) ->
   intensity.domain([min, max]).range colorRange
 
   vis.selectAll('.neighborhood:not(.shared):not(.unclaimed)')
-    .style 'fill', (d) ->
+    .style('fill', (d) ->
       name = d.properties.name
       place = places.filter((p) -> p.key == name)[0]
       count = place.value[subject][type]
-      intensity(count)
+      intensity(count))
+    .style('fill-opacity', 0.5)
+    .style('stroke', (d) ->
+      name = d.properties.name
+      place = places.filter((p) -> p.key == name)[0]
+      count = place.value[subject][type]
+      intensity(count))
     .on('mouseover', (d) ->
       name = d.properties.name
       place = places.filter((p) -> p.key == name)[0]
@@ -197,7 +203,7 @@ loadCensusData = (callback) ->
 updateInfo = (subject, type, data, sort = 'desc') ->
   sortFunc = if sort == 'desc' then d3.descending else d3.ascending
   nhoods = places.map((place) -> name: place.key, value: place.value[subject])
-    .sort((a, b) -> sortFunc a.value[type], b.value[type])[0..19]
+    .sort((a, b) -> sortFunc a.value[type], b.value[type]) #[0..19]
 
   [min, max] = d3.extent nhoods, (d) -> d.value[type]
 
