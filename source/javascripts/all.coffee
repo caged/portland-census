@@ -16,7 +16,6 @@ colors = [
   '#fff'
 ]
 
-
 intensity   = d3.scale.quantile()
 projection  = d3.geo.albers().rotate [120]
 path        = d3.geo.path().projection projection
@@ -39,9 +38,8 @@ tip = d3.tip().attr('class', 'tip').offset([-3, 0]).html (d) ->
   </table>
   "
 
-d3.json 'data/neighborhoods.json', (pdx) ->
+d3.json 'data/neighborhoods-simplified.json', (pdx) ->
   neighborhoods = topojson.feature pdx, pdx.objects.neighborhoods
-
   projection.scale(1).translate [0, 0]
 
   b = path.bounds(neighborhoods)
@@ -126,10 +124,14 @@ $ ->
 # type    - Index of type (2000, 2010, total change, % growth)
 highlight = (subject, type) ->
   colorRange = __mappings[subject][2] ?= colors
-  [min, max] = d3.extent places, (d) -> d.value[subject][type]
+  values = places.map((d) -> parseFloat(d.value[subject][type]))
+    .sort (a, b) -> d3.ascending(a, b)
+
+  # Discard larges and smallest numbers
+  min = values[1]
+  max = values[values.length - 2]
 
   updateInfo subject, type, __mappings[subject]
-
   intensity.domain([min, max]).range colorRange
 
   vis.selectAll('.neighborhood:not(.shared):not(.unclaimed)')
