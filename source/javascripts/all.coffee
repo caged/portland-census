@@ -233,4 +233,5 @@ getFilterParams = ->
 # For example, Portland has a lot of MC Unclaimed areas and overlapping
 # neighborhood boundaries.
 shouldExcludeNeighborhood = (name) ->
-  name.toLowerCase().indexOf('unclaimed') != -1
+  name = name.toLowerCase()
+  name.indexOf('unclaimed') != -1 or name == 'roseway/madison south'
