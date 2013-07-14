@@ -38,7 +38,7 @@ tip = d3.tip().attr('class', 'tip').offset([-3, 0]).html (d) ->
   </table>
   "
 
-d3.json 'data/neighborhoods-simplified.json', (pdx) ->
+d3.json 'data/neighborhoods.json', (pdx) ->
   neighborhoods = topojson.feature pdx, pdx.objects.neighborhoods
   projection.scale(1).translate [0, 0]
 
@@ -159,26 +159,24 @@ mapDataToNeighborhoods = (data) ->
   nhoods = {}
   for hood in neighborhoods.features
     name = hood.properties.name
-    shared = hood.properties.shared
 
-    if !shared && !shouldExcludeNeighborhood(name)
-      current = nhoods[name] = {}
-      current[2010] = data[2010].filter((d) -> d.NEIGHBORHOOD == name)[0]
-      current[2000] = data[2000].filter((d) -> d.NEIGHBORHOOD == name)[0]
+    current = nhoods[name] = {}
+    current[2010] = data[2010].filter((d) -> d.NEIGHBORHOOD == name)[0]
+    current[2000] = data[2000].filter((d) -> d.NEIGHBORHOOD == name)[0]
 
-      for key, ids of window.__mappings
-        try
-          from   = d3.sum(ids[0].map (id) -> current[2000][id])
-          to     = d3.sum(ids[1].map (id) -> current[2010][id])
-          change = to - from
-          growth = parseFloat ((change / from) * 100).toFixed(1)
-          growth = 100 if !isFinite growth
-          current[key] = [from, to, change, growth]
-        catch e
-          console.log "ERROR!!!! #{e} #{name} #{key}"
+    for key, ids of window.__mappings
+      try
+        from   = d3.sum(ids[0].map (id) -> current[2000][id])
+        to     = d3.sum(ids[1].map (id) -> current[2010][id])
+        change = to - from
+        growth = parseFloat ((change / from) * 100).toFixed(1)
+        growth = 100 if !isFinite growth
+        current[key] = [from, to, change, growth]
+      catch e
+        console.log "ERROR!!!! #{e} #{name} #{key}"
 
-      delete current[2000]
-      delete current[2010]
+    delete current[2000]
+    delete current[2010]
 
   places = d3.entries(nhoods).filter (nh) -> !shouldExcludeNeighborhood(nh.key)
   highlight 'Total Population', 0
@@ -188,7 +186,7 @@ loadCensusData = (callback) ->
   out  = {}
   index = 0
   for year in years
-    d3.csv "data/portland-neighborhood-demographics-#{year}.csv", (data) ->
+    d3.csv "data/#{year}-census.csv", (data) ->
       data.map (row) ->
         for key, val of row
           row[key] = parseFloat val if key isnt 'NEIGHBORHOOD'
@@ -235,4 +233,5 @@ getFilterParams = ->
 # For example, Portland has a lot of MC Unclaimed areas and overlapping
 # neighborhood boundaries.
 shouldExcludeNeighborhood = (name) ->
-  name.toLowerCase().indexOf('unclaimed') != -1
+  name = name.toLowerCase()
+  name.indexOf('unclaimed') != -1 or name == 'roseway/madison south'
