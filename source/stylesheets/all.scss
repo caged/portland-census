@@ -93,16 +93,19 @@ svg {
 }
 
 .neighborhood {
-  fill: #e5e5e5;
-  fill-opacity: 0.9;
-  stroke: #000;
-  stroke-width: 1;
-  shape-rendering: crispedges;
-
+  fill: none;
 
   &.shared, &.unclaimed {
     fill: url('#hatch');
   }
+}
+
+.blockgroup {
+  fill: #0aafed;
+  stroke: #fff;
+  stroke-width: 1;
+  stroke-opacity: 0.3;
+  shape-rendering: crispedges;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
