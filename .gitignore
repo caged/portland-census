@@ -12,3 +12,6 @@
 
 # Ignore Sass' cache
 /.sass-cache
+
+source/data/blockgroups.json
+source/data/neighborhoods.json
