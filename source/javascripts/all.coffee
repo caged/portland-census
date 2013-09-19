@@ -38,7 +38,7 @@ tip = d3.tip().attr('class', 'tip').offset([-3, 0]).html (d) ->
   </table>
   "
 
-d3.json 'data/neighborhoods.json', (pdx) ->
+d3.json 'data/pdx.json', (pdx) ->
   neighborhoods = topojson.feature pdx, pdx.objects.neighborhoods
   projection.scale(1).translate [0, 0]
 
