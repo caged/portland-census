@@ -1,0 +1,10 @@
+#!/bin/sh
+
+if [ $# -eq 0 ]
+  then
+    echo "Hey, the to pdx.shp is required for this to run"
+    exit
+fi
+
+topojson -q 1e5 -p +b01001e1,+b02001e2 -o source/data/blockgroups.json $1
+topojson -p -o source/data/pdx.json -- source/data/blockgroups.json source/data/neighborhoods.json
