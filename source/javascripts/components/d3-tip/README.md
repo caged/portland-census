@@ -3,7 +3,7 @@
 ![](https://github-images.s3.amazonaws.com/skitch/Screen_Shot_2013-04-08_at_11.40.10_AM-20130408-114054.png)
 
 ### API Docs
-[API Documentation](docs/index.md)
+See the [API Documentation](docs/index.md)
 
 ### Download Latest Version
 * [Production Version](https://raw.github.com/Caged/d3-tip/v0.5.2/d3.tip.min.js) : **3kb** / **~1kb gzipped**
@@ -19,7 +19,7 @@ bower install Caged/d3-tip
 ``` javascript
 
 /* Initialize tooltip */
-tip = d3.tip().html(function(d) { return d; });
+tip = d3.tip().attr('class', 'd3-tip').html(function(d) { return d; });
 
 /* Invoke the tip in the context of your visualization */
 vis.call(tip)
