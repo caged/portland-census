@@ -6,5 +6,5 @@ if [ $# -eq 0 ]
     exit
 fi
 
-topojson -q 1e5 -p +b01001e1,+b02001e2,+b02001e3,+b02001e5,+b03002e1,+b02001e5,+b02001e6,+b02001e7 -o source/data/blockgroups.json $1
+topojson -q 1e5 -p +b01001e1,+b02001e2,+b02001e3,+b03002e12,+b03002e1,+b02001e5,+b02001e6,+b02001e7,+b08301e18,+b08301e1,+b17017e1 -o source/data/blockgroups.json $1
 topojson -p -o source/data/pdx.json -- source/data/blockgroups.json source/data/neighborhoods.json /Users/justin/dev/me/data/portland-atlas/shp/water.shp
