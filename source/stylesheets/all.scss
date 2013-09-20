@@ -3,7 +3,7 @@
 @charset "utf-8";
 
 body {
-  background: #030303;
+  background: #151515;
   font-family: "Helvetica Neue", Helvetica, sans-serif;
   margin: 0;
 }
@@ -18,30 +18,13 @@ a {
 ////////////////////////////////////////////////////////////////////////////////
 
 header {
-  background: #111;
-  padding: 21px 20px 20px 20px;
+  padding: 20px;
   display: block;
-  font-weight: bold;
   margin-bottom: 0px;
   color: #fff;
-  border-bottom: 1px solid #333;
   font-size: 24px;
-
-  &:before {
-    content: " ";
-    display: block;
-    height: 6px;
-    background-image: linear-gradient(to right, #c500cc 25%, #00a1ff 50%, #8efc2d 100%);
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-  }
-
-  .controls {
-    float: right;
-    margin-top: -25px;
-  }
+  border-bottom: 1px solid #222;
+  font-family: 'Sanchez', serif;
 }
 
 footer {
@@ -113,11 +96,6 @@ svg {
     stroke-opacity: 1;
     stroke: #000;
   }
-}
-
-.water {
-  fill: #1d1d1d;
-  stroke: #2c2c2c;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -209,7 +187,7 @@ svg {
 ////////////////////////////////////////////////////////////////////////////////
 // =grid
 ////////////////////////////////////////////////////////////////////////////////
-.grid div {
+.item {
   float: left;
   border-bottom: 1px solid #222;
   box-sizing: border-box;
@@ -224,5 +202,27 @@ svg {
 
   canvas {
     display: inline-block;
+  }
+}
+
+.legend {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    color: #555;
+    font-size: 9px;
+    display: inline-block;
+    width: 40px;
+    height: 1px;
+    margin: 0;
+    padding: 0;
+
+    span {
+      display: block;
+      margin-top: 8px;
+      text-align: center;
+    }
   }
 }
