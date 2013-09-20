@@ -3,6 +3,7 @@
  * https://github.com/jquery/jquery-migrate
  * Copyright 2005, 2013 jQuery Foundation, Inc. and other contributors; Licensed MIT
  */
+
 (function( jQuery, window, undefined ) {
 // See http://bugs.jquery.com/ticket/13335
 // "use strict";
