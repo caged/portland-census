@@ -94,6 +94,9 @@ svg {
 
 .neighborhood {
   fill: none;
+  stroke: #fff;
+  stroke-width: 1;
+  stroke-opacity: 0.3;
 
   &.shared, &.unclaimed {
     fill: url('#hatch');
@@ -102,10 +105,19 @@ svg {
 
 .blockgroup {
   fill: #0aafed;
-  stroke: #fff;
-  stroke-width: 1;
-  stroke-opacity: 0.3;
   shape-rendering: crispedges;
+  stroke-width: 1;
+  stroke-opacity: 0;
+
+  &:hover {
+    stroke-opacity: 1;
+    stroke: #000;
+  }
+}
+
+.water {
+  fill: #1d1d1d;
+  stroke: #2c2c2c;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

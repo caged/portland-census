@@ -1,11 +1,7 @@
 #= require mappings
-years  = [2000, 2010]
 width  = 900
 height = 680
 vis    = null
-places = null
-neighborhoods = null
-directory = null
 format = d3.format ','
 colors = [
   '#0aafed'
@@ -17,7 +13,7 @@ colors = [
 ]
 
 intensity   = d3.scale.quantile()
-projection  = d3.geo.albers().rotate [120]
+projection  = d3.geo.albers()
 path        = d3.geo.path().projection projection
 
 tip = d3.tip().attr('class', 'tip').offset([-3, 0]).html (d) ->
@@ -40,7 +36,11 @@ tip = d3.tip().attr('class', 'tip').offset([-3, 0]).html (d) ->
 
 d3.json 'data/pdx.json', (pdx) ->
   neighborhoods = topojson.feature pdx, pdx.objects.neighborhoods
-  blockgroups = topojson.feature pdx, pdx.objects.pdx
+  blockgroups   = topojson.feature pdx, pdx.objects.pdx
+  water         = topojson.feature pdx, pdx.objects.water
+
+  [min, max] = d3.extent blockgroups.features, (d) -> d.properties.b01001e1
+  intensity.domain([min, max]).range colors
 
   projection.scale(1).translate [0, 0]
 
@@ -50,22 +50,12 @@ d3.json 'data/pdx.json', (pdx) ->
 
   projection.scale(s).translate(t)
 
-  vis.append('pattern')
-    .attr('id', 'hatch')
-    .attr('patternUnits', 'userSpaceOnUse')
-    .attr('width', 4)
-    .attr('height', 4)
-  .append('path')
-    .style('stroke', '#777')
-    .style('stroke-width', 0.5)
-    .style('shape-rendering', 'crispedges')
-    .attr('d', 'M-1,1 l2,-2 M0,4 l4,-4 M3,5 l2,-2')
-
   vis.selectAll('.blockgroup')
     .data(blockgroups.features)
   .enter().append('path')
     .attr('class', (d) -> "blockgroup")
     .attr('d', path)
+    .style('fill', (d) -> intensity(d.properties.b01001e1))
 
   vis.selectAll('.neighborhood')
     .data(neighborhoods.features)
@@ -73,6 +63,12 @@ d3.json 'data/pdx.json', (pdx) ->
     .attr('class', (d) -> "neighborhood #{d.properties.name.toLowerCase().replace(/\s+/, '-')}")
     .classed('unclaimed', (d) -> d.properties.name.toLowerCase().indexOf('unclaimed') != -1)
     .classed('shared', (d) -> d.properties.shared)
+    .attr('d', path)
+
+  vis.selectAll('.water')
+    .data(water.features)
+  .enter().append('path')
+    .attr('class', (d) -> "water")
     .attr('d', path)
 
 $ ->
