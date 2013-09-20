@@ -50,11 +50,11 @@ render = ->
         context.fill()
 
       # Draw the neighborhoods
-      context.beginPath()
-      path(neighborhoods)
-      context.strokeStyle = '#fff'
-      context.lineWidth = 0.3
-      context.stroke()
+      # context.beginPath()
+      # path(neighborhoods)
+      # context.strokeStyle = '#fff'
+      # context.lineWidth = 0.3
+      # context.stroke()
 
       # Draw the bodies of water
       context.beginPath()
