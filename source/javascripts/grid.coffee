@@ -18,9 +18,12 @@ render = ->
   path = d3.geo.path().projection(projection)
 
   d3.json 'data/pdx.json', (pdx) ->
-    neighborhoods = topojson.feature pdx, pdx.objects.neighborhoods
-    blockgroups   = topojson.feature pdx, pdx.objects.pdx
-    water         = topojson.feature pdx, pdx.objects.water
+    items.append('h3')
+      .attr('class', 'title')
+      .text((d) -> d.key)
+
+    blockgroups = topojson.feature pdx, pdx.objects.pdx
+    water       = topojson.feature pdx, pdx.objects.water
     parks       = topojson.feature pdx, pdx.objects.parks
 
     projection.scale(1).translate([0, 0])
