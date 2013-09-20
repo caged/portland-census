@@ -1,11 +1,16 @@
 //#= require reset
 
 @charset "utf-8";
+html, body {
+  height: 100%;
+}
 
 body {
   background: #151515;
   font-family: "Helvetica Neue", Helvetica, sans-serif;
+  color: #ccc;
   margin: 0;
+  position: relative;
 }
 
 a {
@@ -39,29 +44,6 @@ footer {
   color: #bbb;
   border-top: 1px solid #eee;
   text-align: right;
-}
-
-.sidebar {
-  position: absolute;
-  top: 66px;
-  bottom: 0;
-  width: 350px;
-  background: #111;
-  border-right: 1px solid #222;
-  overflow: auto;
-
-  h2 {
-    font-size: 12px;
-    padding: 10px 10px 10px 20px;
-    font-weight: bold;
-    background: #111;
-    border-bottom: 1px solid #222;
-    color: #555;
-  }
-}
-
-.map {
-  margin-left: 400px;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -99,94 +81,20 @@ svg {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-// =tooltips
-////////////////////////////////////////////////////////////////////////////////
-.tip {
-  background: #fff;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
-  font-size: 12px;
-  width: 320px;
-
-  h3 {
-    padding: 10px;
-    font-weight: bold;
-    background: #f1f1f1;
-    border-bottom: 1px solid #eee;
-    font-size: 13px;
-
-    span {
-      font-size: 11px;
-      font-weight: normal;
-      float: right;
-      color: #777;
-      margin-top: 2px;
-    }
-  }
-
-  table {
-    width: 100%;
-  }
-
-  th {
-    font-weight: bold;
-    padding: 10px;
-    border-bottom: 1px solid #f1f1f1;
-    color: #333;
-  }
-
-  td {
-    text-align: center;
-    padding: 10px;
-    border-bottom: 1px solid #f7f7f7;
-  }
-}
-
-////////////////////////////////////////////////////////////////////////////////
-// =directory                                                                 //
-////////////////////////////////////////////////////////////////////////////////
-.directory {
-  width: 100%;
-  font-size: 12px;
-  color: #777;
-}
-
-.directory th {
-  font-weight: bold;
-  padding: 10px;
-  text-align: left;
-  color: #fff;
-  background: #111;
-  border-bottom: 1px solid #222;
-}
-
-.entry td {
-  padding: 10px 10px;
-  border-bottom: 1px solid #222;
-}
-
-.entry td:nth-child(2) {
-  color: #bbb;
-  max-width: 150px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.rank {
-  font-weight: bold;
-}
-
-.up {
-  color: #0a0;
-}
-
-.down {
-  color: #e30;
-}
-
-////////////////////////////////////////////////////////////////////////////////
 // =grid
 ////////////////////////////////////////////////////////////////////////////////
+.grid:after {
+  display: table;
+  content: " ";
+  clear: both;
+}
+
+.loading {
+  padding: 50px;
+  text-align: center;
+  height: 100%;
+}
+
 .item {
   float: left;
   border-bottom: 1px solid #222;
@@ -206,23 +114,28 @@ svg {
 }
 
 .legend {
-  margin: 0;
+  margin: 0 0 10px 0;
   padding: 0;
   list-style: none;
+  display: table;
+  width: 1%;
 
   li {
     color: #555;
     font-size: 9px;
-    display: inline-block;
-    width: 40px;
     height: 1px;
     margin: 0;
     padding: 0;
+    width: 1%;
+    display: table-cell;
+    position: relative;
 
     span {
       display: block;
-      margin-top: 8px;
       text-align: center;
+      position: absolute;
+      width: 100%;
+      top: 5px;
     }
   }
 }

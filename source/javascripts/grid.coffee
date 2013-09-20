@@ -6,15 +6,17 @@ render = ->
 
   fill = d3.scale.quantile().range colors
 
-  items = d3.select('.js-grid').selectAll('.item')
-    .data(d3.entries(__mappings))
-  .enter().append('div')
-    .attr('class', 'item')
-
   projection  = d3.geo.albers().scale(1).translate [ 0, 0 ]
   path = d3.geo.path().projection(projection)
 
   d3.json 'data/pdx.json', (pdx) ->
+    $('.js-loading').hide()
+
+    items = d3.select('.js-grid').selectAll('.item')
+      .data(d3.entries(__mappings))
+    .enter().append('div')
+      .attr('class', 'item')
+
     items.append('h3')
       .attr('class', 'title')
       .text((d) -> d.key)
@@ -68,6 +70,7 @@ render = ->
 
       legend = d3.select(this).append('ol')
         .attr('class', 'legend')
+        .style('width', "#{gridWidth}px")
 
       quantiles = fill.quantiles()
 

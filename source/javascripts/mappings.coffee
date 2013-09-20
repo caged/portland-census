@@ -13,22 +13,20 @@ window.__mappings =
   'Black population':         (d) -> d.b02001e3
   'Hispanic population':      (d) -> d.b03002e12
   'Asian population':         (d) -> d.b02001e5
-  'Other population':         (d) -> d.b02001e6 + d.b02001e7
   'Percent white':            (d) -> d.b02001e2 / d.b01001e1 * 100
   'Percent black':            (d) -> d.b02001e3 / d.b01001e1 * 100
   'Percent hispanic':         (d) -> d.b03002e12 / d.b01001e1 * 100
-  'Percent other':            (d) -> d.b02001e6 + d.b02001e7 / d.b01001e1 * 100
 
   # Work and culture
-  'Percent biking to work':             (d) -> d.b08301e18 / d.b08301e1 * 100
-  'Travel hour or more to work':      (d) -> d.b08303e12 + d.b08303e13
+  'Percent biking to work':       (d) -> d.b08301e18 / d.b08301e1 * 100
+  'Travel hour or more to work':  (d) -> d.b08303e12 + d.b08303e13
+  'Two or more vehicles':         (d) -> d.b25044e5 + d.b25044e6 + d.b25044e7 + d.b25044e8
 
   # Economics
   'Living in poverty':        (d) -> d.b17017e1
-  'Median Household Income':  (d) -> d.b19013e1
+  'Median household Income':  (d) -> d.b19013e1
+  'Receive public assistance':        (d) -> d.b19057e2
+  'Households > $200k income':  (d) -> d.b19001e17
 
   # Housing
   'Percentage of vacant housing units': (d) -> d.b25004e1 / d.b25001e1 * 100
-
-
-
