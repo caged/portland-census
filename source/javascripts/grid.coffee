@@ -21,6 +21,7 @@ render = ->
     neighborhoods = topojson.feature pdx, pdx.objects.neighborhoods
     blockgroups   = topojson.feature pdx, pdx.objects.pdx
     water         = topojson.feature pdx, pdx.objects.water
+    parks       = topojson.feature pdx, pdx.objects.parks
 
     projection.scale(1).translate([0, 0])
     b = path.bounds(blockgroups)
@@ -63,7 +64,13 @@ render = ->
       # Draw the bodies of water
       context.beginPath()
       path(water)
-      context.fillStyle = '#010101'
+      context.fillStyle = '#151515'
+      context.fill()
+
+      # Draw the bodies of water
+      context.beginPath()
+      path(parks)
+      context.fillStyle = '#151515'
       context.fill()
 
 # Fix for blurry canvas elements on Retina MBP
