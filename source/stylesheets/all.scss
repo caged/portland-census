@@ -3,7 +3,7 @@
 @charset "utf-8";
 
 body {
-  background: #111;
+  background: #030303;
   font-family: "Helvetica Neue", Helvetica, sans-serif;
   margin: 0;
 }
@@ -204,4 +204,27 @@ svg {
 
 .down {
   color: #e30;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// =grid
+////////////////////////////////////////////////////////////////////////////////
+.grid div {
+  float: left;
+  border: 1px solid #222;
+  border-left: none;
+  border-top: none;
+  box-sizing: border-box;
+  padding-bottom: 10px;
+
+  .title {
+    color: #888;
+    margin: 10px;
+    font-weight: bold;
+    font-size: 14px;
+  }
+
+  canvas {
+    display: inline-block;
+  }
 }
