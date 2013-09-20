@@ -96,11 +96,19 @@ formatSymbol = (number) ->
 
 # Fix for blurry canvas elements on Retina MBP
 scaleForRetina = (canvas, context) ->
-  ratio = window.devicePixelRatio / context.webkitBackingStorePixelRatio
   width = $(canvas.node()).width()
   height = $(canvas.node()).width()
 
-  if window.devicePixelRatio != context.webkitBackingStorePixelRatio
+  devicePixelRatio = window.devicePixelRatio || 1
+  backingStoreRatio = context.webkitBackingStorePixelRatio ||
+                      context.mozBackingStorePixelRatio ||
+                      context.msBackingStorePixelRatio ||
+                      context.oBackingStorePixelRatio ||
+                      context.backingStorePixelRatio || 1
+
+  ratio = devicePixelRatio / backingStoreRatio
+
+  if window.devicePixelRatio != backingStoreRatio
     canvas
       .attr('width', width * ratio)
       .attr('height', height * ratio)
