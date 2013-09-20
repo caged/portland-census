@@ -1,18 +1,15 @@
 render = ->
   width  = $(document.body).width()
   height = 280
-  gridWidth = Math.round(width / 4) - 60
-  colors = ['#111', '#333', '#555', '#777', '#999', '#bbb', '#ddd', '#fff']
+  gridWidth = Math.round(width / 4) - 41
+  colors = ['#1a1a1a', '#353535', '#555', '#757575', '#959595', '#b5b5b5', '#d5d5d5', '#f5f5f5']
 
   fill = d3.scale.quantile().range colors
 
   items = d3.select('.js-grid').selectAll('.item')
     .data(d3.entries(__mappings))
   .enter().append('div')
-
-  items.append('h3')
-    .attr('class', 'title')
-    .text((d) -> d.key)
+    .attr('class', 'item')
 
   projection  = d3.geo.albers().scale(1).translate [ 0, 0 ]
   path = d3.geo.path().projection(projection)
@@ -56,13 +53,6 @@ render = ->
         path(blockgroup)
         context.fill()
         context.stroke()
-
-      # Draw the neighborhoods
-      # context.beginPath()
-      # path(neighborhoods)
-      # context.strokeStyle = '#fff'
-      # context.lineWidth = 0.3
-      # context.stroke()
 
       # Draw the bodies of water
       context.beginPath()
