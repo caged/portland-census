@@ -76,6 +76,31 @@ render = ->
       context.fillStyle = '#151515'
       context.fill()
 
+      legend = d3.select(this).append('ol')
+        .attr('class', 'legend')
+
+      quantiles = fill.quantiles()
+
+      legend.selectAll('.value')
+        .data(quantiles)
+      .enter().append('li')
+        .attr('class', 'value')
+        .style('background', (d, i) -> colors[i + 1])
+      .append('span')
+        .text((d, i) ->
+          v = formatSymbol Math.round(d)
+          if i == 0 then "<#{v}"
+          else if i == quantiles.length - 1 then "#{v}+"
+          else v)
+        .style('visibility', (d, i) ->
+          if i % 3 and i != quantiles.length - 1 then 'hidden'
+        )
+
+formatSymbol = (number) ->
+  return number if number < 1e+3
+  pf = d3.formatPrefix(number)
+  "#{pf.scale(number).toFixed(1)}#{pf.symbol}"
+
 # Fix for blurry canvas elements on Retina MBP
 scaleForRetina = (canvas, context) ->
   ratio = window.devicePixelRatio / context.webkitBackingStorePixelRatio
