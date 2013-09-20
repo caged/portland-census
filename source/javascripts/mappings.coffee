@@ -23,9 +23,9 @@ window.__mappings =
   'Two or more vehicles':         (d) -> d.b25044e5 + d.b25044e6 + d.b25044e7 + d.b25044e8
 
   # Economics
-  'Living in poverty':        (d) -> d.b17017e1
-  'Median household Income':  (d) -> d.b19013e1
-  'Receive public assistance':        (d) -> d.b19057e2
+  'Living in poverty':          (d) -> d.b17017e1
+  'Median household Income':    (d) -> d.b19013e1
+  'Receive public assistance':  (d) -> d.b19057e2
   'Households > $200k income':  (d) -> d.b19001e17
 
   # Housing
