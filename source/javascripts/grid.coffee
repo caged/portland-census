@@ -1,8 +1,9 @@
 render = ->
   width  = $(document.body).width()
-  height = 320
-  gridWidth = Math.round(width / 4) - 2
-  colors = ['#0aafed', '#3bbff1', '#6ccff4', '#9ddff8', '#ceeffb', '#fff']
+  height = 280
+  gridWidth = Math.round(width / 4) - 60
+  colors = ['#111', '#333', '#555', '#777', '#999', '#bbb', '#ddd', '#fff']
+
   fill = d3.scale.quantile().range colors
 
   items = d3.select('.js-grid').selectAll('.item')
@@ -46,8 +47,11 @@ render = ->
 
         context.beginPath()
         context.fillStyle = fill(val)
+        context.strokeStyle = 'rgba(255, 255, 255, 0.2)'
+        context.lineWidth = 0.2
         path(blockgroup)
         context.fill()
+        context.stroke()
 
       # Draw the neighborhoods
       # context.beginPath()
@@ -65,8 +69,8 @@ render = ->
 # Fix for blurry canvas elements on Retina MBP
 scaleForRetina = (canvas, context) ->
   ratio = window.devicePixelRatio / context.webkitBackingStorePixelRatio
-  width = $(canvas.node()).outerWidth()
-  height = $(canvas.node()).outerHeight()
+  width = $(canvas.node()).width()
+  height = $(canvas.node()).width()
 
   if window.devicePixelRatio != context.webkitBackingStorePixelRatio
     canvas
