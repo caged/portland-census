@@ -1,8 +1,6 @@
-![Portland Neighborhoods Census](https://f.cloud.github.com/assets/25/558630/b719c24c-c427-11e2-9080-210271406616.png)
+![](portland-acs.png)
 
-A work in progress to map census data to Portland, OR. neighborhoods.  I'm opening this
-up early as an experiment.  There is still much work to do, but if this looks interesting
-to you, feel free to shoot me an email or send a Pull Request.
+An experiment mapping 5 Year American Community Survey [data](http://www.census.gov/geo/maps-data/data/tiger-data.html) wiht [d3](http://d3js.org).
 
 ###
 ```
