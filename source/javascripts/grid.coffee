@@ -62,7 +62,7 @@ render = ->
       context.fillStyle = '#151515'
       context.fill()
 
-      # Draw the bodies of water
+      # Draw the parks
       context.beginPath()
       path(parks)
       context.fillStyle = '#151515'
