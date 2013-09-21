@@ -1,13 +1,11 @@
 render = ->
-  width  = $(document.body).width()
-  height = 280
-  gridWidth = Math.round(width / 4) - 41
-  colors = ['#1a1a1a', '#353535', '#555', '#757575', '#959595', '#b5b5b5', '#d5d5d5', '#f5f5f5']
-
-  color = d3.scale.quantile().range colors
-
+  width       = $(document.body).width()
+  height      = 280
+  gridWidth   = Math.round(width / 4) - 41
+  colors      = ['#1a1a1a', '#353535', '#555', '#757575', '#959595', '#b5b5b5', '#d5d5d5', '#f5f5f5']
+  color       = d3.scale.quantile().range colors
   projection  = d3.geo.albers().scale(1).translate [ 0, 0 ]
-  path = d3.geo.path().projection(projection)
+  path        = d3.geo.path().projection(projection)
 
   d3.json 'data/pdx.json', (pdx) ->
     $('.js-loading').hide()
@@ -25,12 +23,14 @@ render = ->
     water       = topojson.feature pdx, pdx.objects.water
     parks       = topojson.feature pdx, pdx.objects.parks
 
+    # Auto scale map to fit within bounds
     projection.scale(1).translate([0, 0])
     b = path.bounds(blockgroups)
     s = .99 / Math.max((b[1][0] - b[0][0]) / gridWidth, (b[1][1] - b[0][1]) / height)
     t = [(gridWidth - s * (b[1][0] + b[0][0])) / 2, (height - s * (b[1][1] + b[0][1])) / 2]
     projection.scale(s).translate(t)
 
+    # Build the maps from the mappings in mappings.coffee
     items.each (mapping) ->
       canvas = d3.select(this).append('canvas')
         .attr('width', gridWidth)
@@ -70,6 +70,7 @@ render = ->
       context.fillStyle = '#151515'
       context.fill()
 
+      # Draw legends
       quantiles = color.quantiles()
       legend = d3.select(this).append('ol')
         .attr('class', 'legend')
