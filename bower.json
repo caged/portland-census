@@ -1,9 +1,0 @@
-{
-  "name": "opulence",
-  "dependencies": {
-    "d3": "3",
-    "topojson": "1",
-    "jquery": "2",
-    "d3-tip": "0.5"
-  }
-}
