@@ -2,10 +2,11 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <link rel="icon" href="/favicon.png" sizes="32x32">
     <!-- Use title if it's in the page YAML frontmatter -->
     <title>American Community Survey: Portland, OR</title>
     <script type="text/javascript">
-      __datafiles = ["2000-census.csv", "2010-census.csv", "pdx.json"]
+      __datafiles = ["blockgroups.json", "parks.json", "pdx.json"]
     </script>
 
     <link href='http://fonts.googleapis.com/css?family=Sanchez' rel='stylesheet' type='text/css'>
@@ -22,7 +23,11 @@
   <div class="loading js-loading">Loading...</div>
 </div>
     <footer>
-      A civic project by Justin Palmer.
+      <span class="info">
+        <span class="key"></span>
+        = max
+      </span>
+      <span class="credit">A <a href="https://github.com/Caged/portland-census">civic experiment</a> &copy; 2013 <a href="http://twitter.com/caged">Justin Palmer</a>.</span>
     </footer>
   </body>
 </html>

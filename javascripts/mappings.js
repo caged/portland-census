@@ -13,9 +13,6 @@
     'Hispanic population': function(d) {
       return d.b03002e12;
     },
-    'Asian population': function(d) {
-      return d.b02001e5;
-    },
     'Percent white': function(d) {
       return d.b02001e2 / d.b01001e1 * 100;
     },
@@ -43,11 +40,14 @@
     'Receive public assistance': function(d) {
       return d.b19057e2;
     },
-    'Households > $200k income': function(d) {
+    'Households >= $200k income': function(d) {
       return d.b19001e17;
     },
     'Percentage of vacant housing units': function(d) {
-      return d.b25004e1 / d.b25001e1 * 100;
+      return d.b25002e3 / d.b25001e1 * 100;
+    },
+    'Family Households': function(d) {
+      return d.b11001e2;
     }
   };
 

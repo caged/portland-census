@@ -67,83 +67,99 @@ header {
 
 /* line 34, /Users/justin/dev/me/ruby/portland-census/source/stylesheets/all.scss */
 footer {
-  display: none;
   box-sizing: border-box;
   padding: 20px;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width: 100%;
-  background: #f7f7f7;
-  font-size: 11px;
-  color: #bbb;
-  border-top: 1px solid #eee;
-  text-align: right; }
+  background: #151515;
+  font-size: 12px;
+  color: #555;
+  border-top: 1px solid #222; }
+  /* line 45, /Users/justin/dev/me/ruby/portland-census/source/stylesheets/all.scss */
+  footer span.credit {
+    float: right; }
+  /* line 49, /Users/justin/dev/me/ruby/portland-census/source/stylesheets/all.scss */
+  footer span.key {
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    background: #ffc100;
+    border-radius: 1px;
+    vertical-align: middle; }
+  /* line 58, /Users/justin/dev/me/ruby/portland-census/source/stylesheets/all.scss */
+  footer a {
+    color: #bbb; }
 
-/* line 51, /Users/justin/dev/me/ruby/portland-census/source/stylesheets/all.scss */
+/* line 66, /Users/justin/dev/me/ruby/portland-census/source/stylesheets/all.scss */
 .outline {
   fill: #ddd; }
 
-/* line 55, /Users/justin/dev/me/ruby/portland-census/source/stylesheets/all.scss */
+/* line 70, /Users/justin/dev/me/ruby/portland-census/source/stylesheets/all.scss */
 svg {
   margin-top: 20px; }
 
-/* line 59, /Users/justin/dev/me/ruby/portland-census/source/stylesheets/all.scss */
+/* line 74, /Users/justin/dev/me/ruby/portland-census/source/stylesheets/all.scss */
 .neighborhood {
   fill: none;
   stroke: #fff;
   stroke-width: 1;
   stroke-opacity: 0.3; }
-  /* line 65, /Users/justin/dev/me/ruby/portland-census/source/stylesheets/all.scss */
+  /* line 80, /Users/justin/dev/me/ruby/portland-census/source/stylesheets/all.scss */
   .neighborhood.shared, .neighborhood.unclaimed {
     fill: url("#hatch"); }
 
-/* line 70, /Users/justin/dev/me/ruby/portland-census/source/stylesheets/all.scss */
+/* line 85, /Users/justin/dev/me/ruby/portland-census/source/stylesheets/all.scss */
 .blockgroup {
   fill: #0aafed;
   shape-rendering: crispedges;
   stroke-width: 1;
   stroke-opacity: 0; }
-  /* line 76, /Users/justin/dev/me/ruby/portland-census/source/stylesheets/all.scss */
+  /* line 91, /Users/justin/dev/me/ruby/portland-census/source/stylesheets/all.scss */
   .blockgroup:hover {
     stroke-opacity: 1;
     stroke: #000; }
 
-/* line 85, /Users/justin/dev/me/ruby/portland-census/source/stylesheets/all.scss */
+/* line 100, /Users/justin/dev/me/ruby/portland-census/source/stylesheets/all.scss */
+.grid {
+  padding-bottom: 52px; }
+
+/* line 104, /Users/justin/dev/me/ruby/portland-census/source/stylesheets/all.scss */
 .grid:after {
   display: table;
   content: " ";
   clear: both; }
 
-/* line 91, /Users/justin/dev/me/ruby/portland-census/source/stylesheets/all.scss */
+/* line 110, /Users/justin/dev/me/ruby/portland-census/source/stylesheets/all.scss */
 .loading {
   padding: 50px;
   text-align: center;
   height: 100%; }
 
-/* line 97, /Users/justin/dev/me/ruby/portland-census/source/stylesheets/all.scss */
+/* line 116, /Users/justin/dev/me/ruby/portland-census/source/stylesheets/all.scss */
 .item {
   float: left;
   border-bottom: 1px solid #222;
   box-sizing: border-box;
   padding: 20px; }
-  /* line 103, /Users/justin/dev/me/ruby/portland-census/source/stylesheets/all.scss */
+  /* line 122, /Users/justin/dev/me/ruby/portland-census/source/stylesheets/all.scss */
   .item .title {
     color: #888;
     margin: 0 0 10px;
     font-weight: bold;
     font-size: 12px; }
-  /* line 110, /Users/justin/dev/me/ruby/portland-census/source/stylesheets/all.scss */
+  /* line 129, /Users/justin/dev/me/ruby/portland-census/source/stylesheets/all.scss */
   .item canvas {
     display: inline-block; }
 
-/* line 115, /Users/justin/dev/me/ruby/portland-census/source/stylesheets/all.scss */
+/* line 134, /Users/justin/dev/me/ruby/portland-census/source/stylesheets/all.scss */
 .legend {
   margin: 0 0 10px 0;
   padding: 0;
   list-style: none;
   display: table;
   width: 1%; }
-  /* line 122, /Users/justin/dev/me/ruby/portland-census/source/stylesheets/all.scss */
+  /* line 141, /Users/justin/dev/me/ruby/portland-census/source/stylesheets/all.scss */
   .legend li {
     color: #555;
     font-size: 9px;
@@ -153,7 +169,7 @@ svg {
     width: 1%;
     display: table-cell;
     position: relative; }
-    /* line 132, /Users/justin/dev/me/ruby/portland-census/source/stylesheets/all.scss */
+    /* line 151, /Users/justin/dev/me/ruby/portland-census/source/stylesheets/all.scss */
     .legend li span {
       display: block;
       text-align: center;
