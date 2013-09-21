@@ -12,7 +12,6 @@ window.__mappings =
   'White population':         (d) -> d.b02001e2
   'Black population':         (d) -> d.b02001e3
   'Hispanic population':      (d) -> d.b03002e12
-  'Asian population':         (d) -> d.b02001e5
   'Percent white':            (d) -> d.b02001e2 / d.b01001e1 * 100
   'Percent black':            (d) -> d.b02001e3 / d.b01001e1 * 100
   'Percent hispanic':         (d) -> d.b03002e12 / d.b01001e1 * 100
@@ -26,7 +25,8 @@ window.__mappings =
   'Living in poverty':          (d) -> d.b17017e1
   'Median household Income':    (d) -> d.b19013e1
   'Receive public assistance':  (d) -> d.b19057e2
-  'Households > $200k income':  (d) -> d.b19001e17
+  'Households >= $200k income':  (d) -> d.b19001e17
 
   # Housing
-  'Percentage of vacant housing units': (d) -> d.b25004e1 / d.b25001e1 * 100
+  'Percentage of vacant housing units': (d) -> d.b25002e3 / d.b25001e1 * 100
+  'Family Households': (d) -> d.b11001e2
