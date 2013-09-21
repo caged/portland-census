@@ -42,7 +42,19 @@ footer {
   font-size: 12px;
   color: #555;
   border-top: 1px solid #222;
-  text-align: right;
+
+  span.credit {
+    float: right;
+  }
+
+  span.key {
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    background: #ffc100;
+    border-radius: 1px;
+    vertical-align: middle;
+  }
 
   a {
     color: #bbb;
@@ -86,6 +98,10 @@ svg {
 ////////////////////////////////////////////////////////////////////////////////
 // =grid
 ////////////////////////////////////////////////////////////////////////////////
+.grid {
+  padding-bottom: 52px;
+}
+
 .grid:after {
   display: table;
   content: " ";

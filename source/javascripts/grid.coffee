@@ -4,7 +4,7 @@ render = ->
   gridWidth = Math.round(width / 4) - 41
   colors = ['#1a1a1a', '#353535', '#555', '#757575', '#959595', '#b5b5b5', '#d5d5d5', '#f5f5f5']
 
-  fill = d3.scale.quantile().range colors
+  color = d3.scale.quantile().range colors
 
   projection  = d3.geo.albers().scale(1).translate [ 0, 0 ]
   path = d3.geo.path().projection(projection)
@@ -42,14 +42,16 @@ render = ->
 
       extent = d3.extent blockgroups.features, (d) ->
         mapping.value.call this, d.properties
-      fill.domain extent
+      color.domain extent
 
       # Draw the blockgroups
       for blockgroup in blockgroups.features
+        max = extent[1]
         val = mapping.value.call(this, blockgroup.properties)
+        fill = if val == max then 'rgb(255, 193, 0)' else color(val)
 
         context.beginPath()
-        context.fillStyle = fill(val)
+        context.fillStyle = fill
         context.strokeStyle = 'rgba(255, 255, 255, 0.2)'
         context.lineWidth = 0.2
         path(blockgroup)
@@ -68,11 +70,10 @@ render = ->
       context.fillStyle = '#151515'
       context.fill()
 
+      quantiles = color.quantiles()
       legend = d3.select(this).append('ol')
         .attr('class', 'legend')
         .style('width', "#{gridWidth}px")
-
-      quantiles = fill.quantiles()
 
       legend.selectAll('.value')
         .data(quantiles)
